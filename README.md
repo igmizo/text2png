@@ -52,13 +52,12 @@ fs.writeFileSync('out.png', text2png('Hello!', {color: 'blue'}));
 
 ``'canvas'`` returns [node-canvas](https://github.com/Automattic/node-canvas) object.
 
-If you want to use any custom fonts without installing, use `localFontPath` and `localFontName` property.
+If you want to use multiple custom fonts without installing, use `localFonts` array. `weight`, and `style` are optional and default to 'normal'.
 
 ```js
 text2png('with custom fonts', {
   font: '50px Lobster',
-  localFontPath: 'fonts/Lobstar-Regular.ttf',
-  localFontName: 'Lobster'
+  localFonts: [{ name: 'Lobster', path: 'fonts/Lobstar-Regular.ttf', weight: 'normal', style: 'normal' }]
 });
 ```
 

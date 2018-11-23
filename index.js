@@ -22,12 +22,22 @@ const {registerFont, createCanvas} = require('canvas');
  * @param [options.textAlign='left'] text alignment (left, center, right)
  * @param [options.localFontPath] path to local font (e.g. fonts/Lobster-Regular.ttf)
  * @param [options.localFontName] name of local font (e.g. Lobster)
+ * @param [options.localFonts] array of local fonts (e.g. [{name: 'Lobster', path: 'fonts/Lobster-Regular.ttf', weight: 'normal', style: 'normal'}])
  * @param [options.output='buffer'] 'buffer', 'stream', 'dataURL', 'canvas's
  * @returns {string} png image buffer
  */
 const text2png = (text, options = {}) => {
   // Options
   options = parseOptions(options);
+
+  // Register custom fonts
+  if(options.localFonts) {
+    options.localFonts.forEach(font => {
+      const fontWeight = font.weight || 'normal';
+      const fontStyle = font.style || 'normal';
+      registerFont(font.path, { family: font.name, weight: fontWeight, style: fontStyle });
+    });
+  }
 
   // Register a custom font
   if (options.localFontPath && options.localFontName) {
@@ -171,7 +181,8 @@ function parseOptions(options) {
     textColor           : options.textColor || options.color || 'black',
     output              : options.output || 'buffer',
     localFontName       : options.localFontName || null,
-    localFontPath       : options.localFontPath || null
+    localFontPath       : options.localFontPath || null,
+    localFonts          : options.localFonts || null
   };
 }
 
