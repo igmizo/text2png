@@ -44,6 +44,7 @@ fs.writeFileSync('out.png', text2png('Hello!', {color: 'blue'}));
 |option.borderColor|'black'|
 |option.localFontPath||
 |option.localFontName||
+|option.localFonts||
 |option.output|'buffer'|
 
 ``option.color = '#000' | 'rgb(0, 0, 0)' | 'black' | ...``
